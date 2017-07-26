@@ -4,35 +4,40 @@ import * as dataActions from '../../actions/dataActions';
 
 class CurrencySelect extends Component {
   state = {
-    pair1: 'USD',
-    pair2: 'RUB',
+    currencyPair1: 'USD',
+    currencyPair2: 'RUB',
   }
 
   handleSelectChange1 = (e) => {
-    this.setState({pair1: e.target.value});
+    this.setState({ currencyPair1: e.target.value });
   }
 
   handleSelectChange2 = (e) => {
-    this.setState({pair2: e.target.value});
+    this.setState({ currencyPair2: e.target.value });
   }
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.getData(this.state.pair1, this.state.pair2);
+    this.props.getData(this.state.currencyPair1, this.state.currencyPair2);
   }
   render() {
-    console.log(this.props.data, 'currencyselect')
-    return <form action="" onSubmit={this.onSubmit} >
-      <select value={this.state.pair1} onChange={this.handleSelectChange1} name="" id="">
-        <option value="USD">USD</option>
-        <option value="RUB">RUB</option>
-      </select>
-      <select value={this.state.pair2} onChange={this.handleSelectChange2} name="" id="">
-        <option value="USD">USD</option>
-        <option value="RUB">RUB</option>
-      </select>
-      <input type="submit" value="get currency" />
-    </form>;
+    return (
+      <form action="" onSubmit={this.onSubmit} >
+        <select value={this.state.currencyPair1} onChange={this.handleSelectChange1} name="" id="">
+          <option value="USD">USD</option>
+          <option value="RUB">RUB</option>
+          <option value="EUR">EUR</option>
+          <option value="UAH">UAH</option>
+        </select>
+        <select value={this.state.currencyPair2} onChange={this.handleSelectChange2} name="" id="">
+          <option value="USD">USD</option>
+          <option value="RUB">RUB</option>
+          <option value="EUR">EUR</option>
+          <option value="UAH">UAH</option>
+        </select>
+        <input type="submit" value="get currency" />
+      </form>
+    );
   }
 }
 

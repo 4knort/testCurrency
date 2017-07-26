@@ -18,8 +18,14 @@ export function getData(currency1, currency2) {
 
   return function(dispatch) {
     axios.get(query).then(response => { 
-      // console.log(response.data.query.results.rate, "actions")
       dispatch(setData(response.data));   
     });
+  };
+}
+
+export function deleteData(id) {
+  return {
+    type: types.DELETE_DATA,
+    payload: id,
   };
 }
