@@ -5,11 +5,8 @@ import thunkMiddleware from 'redux-thunk';
 import { throttle } from 'lodash';
 import rootReducer from 'modules';
 
-const routingMiddleware = routerMiddleware(hashHistory);
-
 const middlewares = [
   thunkMiddleware,
-  routingMiddleware,
 ];
 
 function loadState() {
@@ -35,9 +32,9 @@ function saveState(state) {
   }
 }
 
-const configureStore = (initialState = loadState()) => {
+const configureStore = () => {
   // Prevent redux devTools initialization in production
-  const store = createStore(rootReducer, initialState, compose(
+  const store = createStore(rootReducer, compose(
     applyMiddleware(...middlewares),
     window.devToolsExtension && process.env.NODE_ENV === 'development'
       ? window.devToolsExtension()
@@ -45,18 +42,9 @@ const configureStore = (initialState = loadState()) => {
   ));
 
   // Save state to localStorage every second
-  store.subscribe(throttle(() => {
-    saveState(store.getState());
-  }, 1000));
-
-  if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./modules', () => {
-      const nextRootReducer = require('./modules/index');
-
-      store.replaceReducer(nextRootReducer);
-    });
-  }
+  // store.subscribe(throttle(() => {
+  //   saveState(store.getState());
+  // }, 1000));
 
   return store;
 };

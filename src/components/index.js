@@ -1,3 +1,3 @@
 export App from './App/App';
-export Title from './Title/Title';
-export ReactLogo from './ReactLogo/ReactLogo';
+export CurrencySelect from './CurrencySelect/CurrencySelect';
+export CurrencyTable from './CurrencyTable/CurrencyTable';

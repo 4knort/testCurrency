@@ -1,10 +1,10 @@
 import React from 'react';
-import { Title, ReactLogo } from 'components';
+import { CurrencySelect, CurrencyTable } from 'components';
 
 const IndexPage = () => (
   <div className="index-page">
-    <ReactLogo />
-    <Title>React Pages Boilerplate</Title>
+    <CurrencySelect />
+    <CurrencyTable />
   </div>
 );
 
