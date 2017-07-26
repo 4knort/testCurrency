@@ -98,6 +98,13 @@ button {
   cursor: pointer;
 }
 
+.refresh-btn {
+  float: right;
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 5px;
+}
+
 form {
   width: 500px;
   margin: 0 auto;

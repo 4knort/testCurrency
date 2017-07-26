@@ -20,23 +20,38 @@ class CurrencySelect extends Component {
     e.preventDefault();
     this.props.getData(this.state.currencyPair1, this.state.currencyPair2);
   }
+
+  onRefreshClick = () => {
+    let pairs = '';
+    
+    this.props.data.forEach(item => {
+      pairs = pairs + `${item.id}%2C`;
+    })
+
+    pairs = `%22${pairs.slice(0, -3)}%22`;
+
+    this.props.refreshData(pairs);
+  }
   render() {
     return (
-      <form action="" onSubmit={this.onSubmit} >
-        <select value={this.state.currencyPair1} onChange={this.handleSelectChange1} name="" id="">
-          <option value="USD">USD</option>
-          <option value="RUB">RUB</option>
-          <option value="EUR">EUR</option>
-          <option value="UAH">UAH</option>
-        </select>
-        <select value={this.state.currencyPair2} onChange={this.handleSelectChange2} name="" id="">
-          <option value="USD">USD</option>
-          <option value="RUB">RUB</option>
-          <option value="EUR">EUR</option>
-          <option value="UAH">UAH</option>
-        </select>
-        <input type="submit" value="get currency" />
-      </form>
+      <div>
+        <form action="" onSubmit={this.onSubmit} >
+          <select value={this.state.currencyPair1} onChange={this.handleSelectChange1} name="" id="">
+            <option value="USD">USD</option>
+            <option value="RUB">RUB</option>
+            <option value="EUR">EUR</option>
+            <option value="UAH">UAH</option>
+          </select>
+          <select value={this.state.currencyPair2} onChange={this.handleSelectChange2} name="" id="">
+            <option value="USD">USD</option>
+            <option value="RUB">RUB</option>
+            <option value="EUR">EUR</option>
+            <option value="UAH">UAH</option>
+          </select>
+          <input type="submit" value="get currency" />
+          <button onClick={this.onRefreshClick} className="refresh-btn">refresh</button>
+        </form>
+      </div>
     );
   }
 }
