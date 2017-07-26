@@ -32,9 +32,9 @@ function saveState(state) {
   }
 }
 
-const configureStore = () => {
+const configureStore = (initialState = loadState()) => {
   // Prevent redux devTools initialization in production
-  const store = createStore(rootReducer, compose(
+  const store = createStore(rootReducer, initialState, compose(
     applyMiddleware(...middlewares),
     window.devToolsExtension && process.env.NODE_ENV === 'development'
       ? window.devToolsExtension()
@@ -42,9 +42,9 @@ const configureStore = () => {
   ));
 
   // Save state to localStorage every second
-  // store.subscribe(throttle(() => {
-  //   saveState(store.getState());
-  // }, 1000));
+  store.subscribe(throttle(() => {
+    saveState(store.getState());
+  }, 1000));
 
   return store;
 };
